@@ -93,6 +93,11 @@ window.DOMUS = {
       text: "Momentos de Palavra, formação e aprofundamento, para escutar com o coração e caminhar mais fundo na fé.",
     },
     {
+      icon: "adoracao",
+      title: "Adoração",
+      text: "Um tempo diante do Santíssimo, em silêncio e louvor, para deixar o coração ser tocado por Deus.",
+    },
+    {
       icon: "joy",
       title: "Animação",
       text: "Alegria que se vive junto: música, encontro e a leveza de estar em comunidade.",
@@ -104,6 +109,23 @@ window.DOMUS = {
     },
     // Adicione novas experiências aqui quando forem confirmadas.
   ],
+
+  /* ---------- PREGAÇÕES (temas do dia) ----------
+     Baseado no cronograma do DOMUS anterior. O caminho segue
+     Romanos 5: a tribulação produz a paciência, a paciência a
+     fidelidade, e a fidelidade a esperança. Edite quando os
+     temas de 2026 forem confirmados. */
+  preachings: {
+    eyebrow: "As pregações",
+    title: "Um caminho, três passos",
+    intro: "Cada pregação aprofunda a anterior e nos conduz da tribulação até a esperança.",
+    items: [
+      { step: "01", title: "Tribulação que produz Paciência" },
+      { step: "02", title: "Paciência que prova Fidelidade" },
+      { step: "03", title: "A Fidelidade comprovada gera a Esperança" },
+    ],
+    closing: "E a esperança não decepciona.",
+  },
 
   /* ---------- PREGADORES / LINE-UP ----------
      Enquanto `revealed: false`, o card aparece velado (silhueta de

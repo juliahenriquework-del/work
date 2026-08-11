@@ -506,14 +506,41 @@ input, textarea, select { font: inherit; }
 .exp-card__icon[data-icon="chalice"] svg { animation: icoFloat 4s var(--ease-soft) infinite; }
 .exp-card__icon[data-icon="bread"] svg { animation: icoFloat 3.4s var(--ease-soft) infinite .3s; }
 .exp-card__icon[data-icon="joy"] svg { transform-origin: center 60%; animation: icoRock 4.4s var(--ease-soft) infinite; }
+.exp-card__icon[data-icon="adoracao"] svg { transform-origin: center 38%; animation: icoPulse 3.4s var(--ease-soft) infinite; }
 @keyframes icoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 @keyframes icoRock { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+@keyframes icoPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: .85; } }
 /* brilho pulsante atrás do ícone ao entrar na viewport */
 .exp-card.is-in .exp-card__icon { animation: icoGlow 2.4s var(--ease-soft) .2s; }
 @keyframes icoGlow { 0%,100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 18px -2px color-mix(in srgb, var(--accent) 55%, transparent); } }
 .exp-card__num { position: absolute; top: 20px; right: 22px; font-family: var(--f-display); font-style: italic; font-size: 1.1rem; color: color-mix(in srgb, var(--accent) 45%, transparent); z-index: 2; }
 .exp-card h3 { font-family: var(--f-round); font-weight: 600; font-size: 1.26rem; margin-bottom: 8px; color: var(--card-fg); }
 .exp-card p { color: var(--card-fg-soft); font-size: .98rem; line-height: 1.55; }
+
+/* ---------- JORNADA DAS PREGAÇÕES ---------- */
+.preachings { margin-top: clamp(40px, 8vw, 68px); max-width: 720px; }
+.preachings__head { margin-bottom: 20px; }
+.preachings__eyebrow { font-family: var(--f-round); font-weight: 600; font-size: .72rem; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--eyebrow); margin-bottom: 8px; }
+.preachings__title { font-family: var(--f-display); font-style: italic; font-weight: 600; font-size: clamp(1.5rem, 6vw, 2rem); color: var(--fg); margin-bottom: 8px; }
+.preachings__intro { color: var(--fg-soft); font-size: 1rem; max-width: 48ch; }
+.preachings__list { list-style: none; padding: 0; margin: 26px 0 0; position: relative; }
+.preachings__list::before { content: ""; position: absolute; left: 23px; top: 30px; bottom: 30px; width: 1px;
+  background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 15%, transparent)); opacity: .5; }
+.preachings__item { display: flex; align-items: center; gap: 18px; padding: 12px 0; position: relative; }
+.preachings__step { flex: 0 0 auto; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%;
+  font-family: var(--f-display); font-style: italic; font-weight: 600; font-size: 1.05rem; color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg)); position: relative; z-index: 1;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+.preachings__item.is-in .preachings__step { animation: stepGlow 2.2s var(--ease-soft) .2s; }
+@keyframes stepGlow { 40% { box-shadow: 0 0 18px -2px color-mix(in srgb, var(--accent) 60%, transparent); } }
+.preachings__name { font-family: var(--f-display); font-style: italic; font-size: clamp(1.15rem, 4.6vw, 1.5rem);
+  color: var(--fg); line-height: 1.3; }
+.preachings__closing { margin-top: 22px; padding-left: 66px; font-family: var(--f-display); font-style: italic;
+  font-size: clamp(1.1rem, 4.6vw, 1.35rem);
+  background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (min-width: 900px) { .preachings__closing { padding-left: 66px; } }
 
 /* ---------- A PERFEITA ALEGRIA ---------- */
 .joy { text-align: center; }
@@ -748,7 +775,7 @@ input, textarea, select { font: inherit; }
   .nav-mobile { display: none !important; }
   .floating-cta { display: none; }
 
-  .exp-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .exp-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
   .speakers__track { grid-auto-columns: 1fr; overflow: visible; grid-template-columns: repeat(3, 1fr); grid-auto-flow: row; margin-inline: 0; padding-inline: 0; }
   .franciscan__grid { grid-template-columns: 1.2fr .8fr; }
   .franciscan__mark { order: 0; }

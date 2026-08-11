@@ -23,6 +23,7 @@
     flame:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3 .5 2 2 2.5 2 2.5-1-3 2-5.5 2-8.5z"/></svg>',
     joy:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3-8 3 8M12 3v7M4 13c2 3 5 4 8 4s6-1 8-4M6 20c1.5 1.5 3.7 2 6 2s4.5-.5 6-2"/></svg>',
     bread:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11c0-3 3.5-5 8-5s8 2 8 5c0 1-.7 1.6-1.6 1.6H5.6C4.7 12.6 4 12 4 11z"/><path d="M6 12.6V18a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5.4M9 6.5V4M13 6.2V3.6"/></svg>',
+    adoracao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3"/><path d="M12 2.4v1.8M12 13.8v1.8M4.8 9h1.8M17.4 9h1.8M6.8 3.8l1.2 1.2M17.2 3.8l-1.2 1.2M6.8 14.2l1.2-1.2M17.2 14.2l-1.2-1.2"/><path d="M12 15.6V19M9 21h6"/></svg>',
   };
 
   /* =============================================================
@@ -79,6 +80,27 @@
         <h3>${x.title}</h3>
         <p>${x.text}</p>
       </article>`).join("");
+  }
+
+  /* ---------- pregações (temas do dia) ---------- */
+  function renderPreachings() {
+    const el = $("#preachings");
+    const P = CFG.preachings;
+    if (!el || !P || !P.items) return;
+    el.innerHTML = `
+      <div class="preachings__head reveal" data-anim="up">
+        ${P.eyebrow ? `<p class="preachings__eyebrow">${P.eyebrow}</p>` : ""}
+        ${P.title ? `<h3 class="preachings__title">${P.title}</h3>` : ""}
+        ${P.intro ? `<p class="preachings__intro">${P.intro}</p>` : ""}
+      </div>
+      <ol class="preachings__list">
+        ${P.items.map((it, i) => `
+          <li class="preachings__item reveal" data-anim="up" data-delay="${i % 3}">
+            <span class="preachings__step">${it.step || String(i + 1).padStart(2, "0")}</span>
+            <span class="preachings__name">${it.title}</span>
+          </li>`).join("")}
+      </ol>
+      ${P.closing ? `<p class="preachings__closing reveal" data-anim="fade">${P.closing}</p>` : ""}`;
   }
 
   /* ---------- pregadores ---------- */
@@ -523,6 +545,7 @@
     injectConfig();
     renderHeroCarousel();
     renderExperiences();
+    renderPreachings();
     renderSpeakers();
     renderBatch();
     renderFooter();
