@@ -7,6 +7,19 @@
    ============================================================= */
 
 window.DOMUS = {
+  /* ---------- CARROSSEL DO HERO (fotos do encontro anterior) ----------
+     Troca automática (~2s) com fade + leve zoom. Fácil substituição:
+     basta editar esta lista. Cada item:
+       src      -> caminho/URL da foto (ex.: "assets/img/hero/01.jpg")
+       position -> enquadramento (object-position), ex.: "center 30%"
+                   use para manter rostos/pessoas bem centralizados no mobile.
+     Enquanto a lista estiver vazia, o hero usa placeholders da identidade. */
+  heroPhotos: [
+    // { src: "assets/img/hero/01.jpg", position: "center 35%" },
+    // { src: "assets/img/hero/02.jpg", position: "center 30%" },
+    // { src: "assets/img/hero/03.jpg", position: "center center" },
+  ],
+
   /* ---------- EVENTO ---------- */
   event: {
     name: "DOMUS 2026",
@@ -77,7 +90,7 @@ window.DOMUS = {
     {
       icon: "flame",
       title: "Pregações",
-      text: "Momentos de Palavra, formação e aprofundamento — para escutar com o coração e caminhar mais fundo na fé.",
+      text: "Momentos de Palavra, formação e aprofundamento, para escutar com o coração e caminhar mais fundo na fé.",
     },
     {
       icon: "joy",
@@ -87,7 +100,7 @@ window.DOMUS = {
     {
       icon: "bread",
       title: "Lanche Partilhado",
-      text: "A mesa que aproxima. Partilhar o pão é partilhar a vida — o gesto simples da fraternidade.",
+      text: "A mesa que aproxima. Partilhar o pão é partilhar a vida: o gesto simples da fraternidade.",
     },
     // Adicione novas experiências aqui quando forem confirmadas.
   ],
@@ -140,7 +153,7 @@ window.DOMUS = {
     short: "Li e concordo com o termo de autorização de uso de imagem do DOMUS 2026.",
     full: [
       "O DOMUS 2026 contará com cobertura fotográfica e audiovisual para fins de registro, memória e divulgação do encontro.",
-      "Ao concordar com este termo, você autoriza, de forma gratuita e por prazo indeterminado, o uso da sua imagem, voz e depoimentos captados durante o evento em materiais de divulgação da organização — como redes sociais, site, vídeos e peças gráficas — sempre em contexto ligado à finalidade religiosa e formativa do DOMUS.",
+      "Ao concordar com este termo, você autoriza, de forma gratuita e por prazo indeterminado, o uso da sua imagem, voz e depoimentos captados durante o evento em materiais de divulgação da organização, como redes sociais, site, vídeos e peças gráficas, sempre em contexto ligado à finalidade religiosa e formativa do DOMUS.",
       "Nenhuma imagem será cedida a terceiros para fins comerciais alheios ao evento. Você pode solicitar a revisão do uso de uma imagem específica entrando em contato com a organização.",
       "Para participantes menores de idade, esta autorização deverá ser confirmada pelo responsável legal no ato da inscrição.",
       "Este texto é provisório e será validado pela organização antes da publicação definitiva.",

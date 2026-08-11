@@ -39,18 +39,50 @@
     });
   }
 
+  /* ---------- carrossel do hero (fotos do encontro anterior) ---------- */
+  function renderHeroCarousel() {
+    const media = $("#heroMedia");
+    if (!media) return;
+    const photos = (CFG.heroPhotos || []).filter((p) => p && p.src);
+    if (photos.length) {
+      media.innerHTML = photos.map((p, i) =>
+        `<div class="hero__slide${i === 0 ? " is-active" : ""}" style="background-image:url('${p.src}');${p.position ? `background-position:${p.position};` : ""}"></div>`
+      ).join("");
+    } else {
+      // placeholders elegantes da identidade enquanto as fotos não chegam
+      media.innerHTML = [0, 1, 2].map((i) =>
+        `<div class="hero__slide hero__slide--ph${i === 0 ? " is-active" : ""}"></div>`).join("");
+    }
+  }
+  function startHeroCarousel() {
+    const media = $("#heroMedia");
+    if (!media) return;
+    const slides = $$(".hero__slide", media);
+    if (slides.length <= 1) return;
+    let idx = 0;
+    const INTERVAL = 2200;   // troca a cada ~2s
+    setInterval(() => {
+      slides[idx].classList.remove("is-active");
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add("is-active");
+    }, INTERVAL);
+  }
+
   /* ---------- experiências ---------- */
   function renderExperiences() {
     const grid = $("#expGrid");
     if (!grid || !CFG.experiences) return;
     grid.innerHTML = CFG.experiences.map((x, i) => `
-      <article class="exp-card reveal" data-anim="up" data-delay="${i % 3}" role="listitem">
+      <article class="card exp-card reveal" data-anim="up" data-delay="${i % 3}" role="listitem">
         <span class="exp-card__num">0${i + 1}</span>
         <span class="exp-card__icon">${ICONS[x.icon] || ICONS.flame}</span>
         <h3>${x.title}</h3>
         <p>${x.text}</p>
       </article>`).join("");
   }
+
+  /* silhueta humana (busto) claramente reconhecível como pessoa */
+  const SILHOUETTE = `<svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" fill="currentColor" aria-hidden="true"><circle cx="100" cy="66" r="40"/><path d="M20 240c0-70 36-108 80-108s80 38 80 108z"/></svg>`;
 
   /* ---------- pregadores ---------- */
   function renderSpeakers() {
@@ -59,8 +91,9 @@
     track.innerHTML = CFG.speakers.map((s) => {
       if (s.revealed) {
         return `
-        <article class="speaker-card is-revealed reveal" data-anim="up" role="listitem">
+        <article class="card speaker-card is-revealed reveal" data-anim="up" role="listitem">
           ${s.photo ? `<img class="speaker-card__photo" src="${s.photo}" alt="${s.name || "Pregador"}" loading="lazy" />` : ""}
+          <span class="speaker-card__scrim"></span>
           <div class="speaker-card__body">
             <span class="speaker-card__kicker">${s.kicker || "Pregação"}</span>
             <span class="speaker-card__name">${s.name || ""}</span>
@@ -69,36 +102,17 @@
         </article>`;
       }
       return `
-        <article class="speaker-card reveal" data-anim="up" role="listitem" aria-label="Pregador ainda não revelado">
-          <span class="speaker-card__veil"></span>
-          <span class="speaker-card__silhouette"></span>
-          <span class="speaker-card__sheen"></span>
+        <article class="card speaker-card reveal" data-anim="up" role="listitem" aria-label="Pregador ainda não revelado">
+          <span class="speaker-card__backlight"></span>
+          <span class="speaker-card__figure"><span class="speaker-card__silhouette">${SILHOUETTE}</span></span>
+          <span class="speaker-card__rim"></span>
+          <span class="speaker-card__scrim"></span>
           <div class="speaker-card__body">
             <span class="speaker-card__kicker">${s.kicker || "Pregação"}</span>
             <span class="speaker-card__tag">Em breve</span>
           </div>
         </article>`;
     }).join("");
-  }
-
-  /* ---------- informações ---------- */
-  function renderInfo() {
-    const grid = $("#infoGrid");
-    if (!grid) return;
-    const e = CFG.event || {};
-    const items = [
-      { dt: "Data",       dd: e.dateLabelFull, wide: false },
-      { dt: "Dia",        dd: e.weekday,       wide: false },
-      { dt: "Horário",    dd: e.time,          wide: false },
-      { dt: "Local",      dd: e.venue,         wide: false },
-      { dt: "Endereço",   dd: e.address,       wide: true  },
-      { dt: "Participantes", dd: e.ageRange,   wide: false },
-      { dt: "Orientações",   dd: e.notes,      wide: true  },
-    ].filter((it) => it.dd);   // oculta campos vazios automaticamente
-    grid.innerHTML = items.map((it) => `
-      <div class="info-item reveal ${it.wide ? "info-item--wide" : ""}" data-anim="up">
-        <dt>${it.dt}</dt><dd>${it.dd}</dd>
-      </div>`).join("");
   }
 
   /* ---------- lote público atual ---------- */
@@ -372,13 +386,13 @@
         ["Paróquia / Comunidade", $("#parish").value.trim()],
         ["Alergia/restrição", allergy === "sim" ? ($("#allergyDetail").value.trim() || "Sim") : "Não"],
         ["Contato de emergência", $("#emergency").value.trim()],
-        ["Uso de imagem", $("#imageConsent").checked ? "Autorizado" : "—"],
+        ["Uso de imagem", $("#imageConsent").checked ? "Autorizado" : "Pendente"],
       ];
       g.innerHTML = rows.map(([dt, dd]) =>
-        `<dl class="summary__row"><dt>${dt}</dt><dd>${dd || "—"}</dd></dl>`).join("");
+        `<dl class="summary__row"><dt>${dt}</dt><dd>${dd || "Não informado"}</dd></dl>`).join("");
     }
     function formatDate(v) {
-      if (!v) return "—";
+      if (!v) return "Não informado";
       const d = new Date(v + "T00:00");
       return isNaN(d) ? v : d.toLocaleDateString("pt-BR");
     }
@@ -476,9 +490,9 @@
      ============================================================= */
   function init() {
     injectConfig();
+    renderHeroCarousel();
     renderExperiences();
     renderSpeakers();
-    renderInfo();
     renderBatch();
     renderFooter();
     splitWords();
@@ -486,6 +500,7 @@
     joyBeats();
     portalScroll();
     heroIntro();
+    startHeroCarousel();
     header();
     floatingCta();
     form();

@@ -33,6 +33,7 @@ Abra esse arquivo para alterar, sem mexer no restante do código:
 
 | O que editar | Onde |
 |---|---|
+| **Fotos do carrossel do hero** | `heroPhotos` |
 | Data, horário, local, endereço, faixa etária | `event` |
 | **Preço** e lote atual | `batches` |
 | Ativar o Lote 02 / 03 | mude `public: false` → `public: true` |
@@ -47,6 +48,29 @@ Abra esse arquivo para alterar, sem mexer no restante do código:
 > Assim você não mostra "Local: a definir" — simplesmente não aparece até ser preenchido.
 
 ---
+
+## 📸 Fotos do encontro (carrossel do hero)
+
+O hero tem um carrossel automático (troca a cada ~2s, com fade e leve zoom).
+Coloque as fotos em `assets/img/hero/` e liste em `heroPhotos` no config:
+
+```js
+heroPhotos: [
+  { src: "assets/img/hero/01.jpg", position: "center 35%" },
+  { src: "assets/img/hero/02.jpg", position: "center 30%" },
+],
+```
+
+O `position` (object-position) ajuda a manter rostos e pessoas bem enquadrados
+no mobile. **Enquanto a lista estiver vazia, o hero usa placeholders da
+identidade** (gradientes em vinho), então a página já fica completa.
+
+## 🎨 Alternância de cores das dobras
+
+Cada seção tem um tema de cor via classe no HTML: `t-wine`, `t-wine-deep`,
+`t-cream` e `t-gold`. Todos os textos, cards e acentos se adaptam sozinhos
+por meio de tokens CSS. Para trocar o tema de uma dobra, basta mudar a classe
+na tag `<section>`.
 
 ## 💰 Preço
 
