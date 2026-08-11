@@ -545,7 +545,6 @@
     injectConfig();
     renderHeroCarousel();
     renderExperiences();
-    renderPreachings();
     renderSpeakers();
     renderBatch();
     renderFooter();

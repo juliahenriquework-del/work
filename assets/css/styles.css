@@ -417,7 +417,8 @@ input, textarea, select { font: inherit; }
 }
 .hero__big {
   font-family: var(--f-display); font-style: italic; font-weight: 600;
-  font-size: clamp(3.6rem, 21vw, 10.5rem); line-height: .9; letter-spacing: -.015em;
+  font-size: clamp(3.6rem, 21vw, 10.5rem); line-height: 1.04; letter-spacing: -.015em;
+  padding: 0 .08em .14em; /* espaço p/ o descendente do "g" não ser cortado pelo background-clip */
   background: linear-gradient(105deg, #9a6e28 0%, #dcb15e 34%, #f6e8c8 52%, #dcb15e 70%, #b98436 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
