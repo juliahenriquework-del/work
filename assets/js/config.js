@@ -15,9 +15,12 @@ window.DOMUS = {
                    use para manter rostos/pessoas bem centralizados no mobile.
      Enquanto a lista estiver vazia, o hero usa placeholders da identidade. */
   heroPhotos: [
-    // { src: "assets/img/hero/01.jpg", position: "center 35%" },
-    // { src: "assets/img/hero/02.jpg", position: "center 30%" },
-    // { src: "assets/img/hero/03.jpg", position: "center center" },
+    { src: "assets/img/hero/01.webp", position: "center 42%" }, // adoração
+    { src: "assets/img/hero/02.webp", position: "center 32%" }, // oração / abraço
+    { src: "assets/img/hero/03.webp", position: "center 38%" }, // jovens rezando
+    { src: "assets/img/hero/04.webp", position: "center 28%" }, // pregação
+    { src: "assets/img/hero/05.webp", position: "center 45%" }, // o grupo
+    { src: "assets/img/hero/06.webp", position: "center 40%" }, // altar
   ],
 
   /* ---------- EVENTO ---------- */

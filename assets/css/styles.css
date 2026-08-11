@@ -413,6 +413,7 @@ input, textarea, select { font: inherit; }
 .hero__pre {
   font-family: var(--f-display); font-style: italic; font-weight: 400;
   font-size: clamp(1.4rem, 7vw, 3rem); color: var(--ivory); letter-spacing: .01em; margin-bottom: .04em;
+  text-shadow: 0 2px 24px rgba(18,3,6,.7), 0 1px 3px rgba(18,3,6,.5);
 }
 .hero__big {
   font-family: var(--f-display); font-style: italic; font-weight: 600;
