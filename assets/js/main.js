@@ -75,14 +75,14 @@
     grid.innerHTML = CFG.experiences.map((x, i) => `
       <article class="card exp-card reveal" data-anim="up" data-delay="${i % 3}" role="listitem">
         <span class="exp-card__num">0${i + 1}</span>
-        <span class="exp-card__icon">${ICONS[x.icon] || ICONS.flame}</span>
+        <span class="exp-card__icon" data-icon="${x.icon}">${ICONS[x.icon] || ICONS.flame}</span>
         <h3>${x.title}</h3>
         <p>${x.text}</p>
       </article>`).join("");
   }
 
-  /* silhueta humana (busto) claramente reconhecível como pessoa */
-  const SILHOUETTE = `<svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" fill="currentColor" aria-hidden="true"><circle cx="100" cy="66" r="40"/><path d="M20 240c0-70 36-108 80-108s80 38 80 108z"/></svg>`;
+  /* silhueta humana (cabeça, ombros e tronco) claramente reconhecível como pessoa */
+  const SILHOUETTE = `<svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="currentColor" aria-hidden="true"><circle cx="100" cy="58" r="34"/><path d="M62 96q38 16 76 0l-6 10q10 6 14 20l10 62q-56 20 -112 0l10-62q4-14 14-20z"/><path d="M52 264c0-58 30-92 48-92s48 34 48 92z"/></svg>`;
 
   /* ---------- pregadores ---------- */
   function renderSpeakers() {
@@ -133,7 +133,7 @@
       <p class="batch__status">${b.statusLabel || ""}</p>
       <div class="batch__price"><span class="cur">R$</span><span class="val">${Number(b.price).toLocaleString("pt-BR", { minimumFractionDigits: 0 })}</span></div>
       ${b.priceProvisional ? `<p class="batch__prov">valor provisório e demonstrativo</p>` : ""}
-      <a href="#inscricao" class="btn btn--gold btn--lg">Garantir meu lugar</a>
+      <a href="#inscricao" class="btn btn--wine btn--lg">Garantir meu lugar</a>
       ${meta ? `<p class="batch__meta">${meta}</p>` : ""}`;
   }
 
@@ -228,21 +228,53 @@
       });
       $$("a", menu).forEach((a) => a.addEventListener("click", close));
     }
+  }
 
-    // nav ativa por seção (desktop)
-    const links = $$(".nav-desktop a");
-    if (links.length && "IntersectionObserver" in window) {
-      const map = {};
-      links.forEach((a) => { const id = a.getAttribute("href").slice(1); const sec = document.getElementById(id); if (sec) map[id] = a; });
+  /* ---------- barra de progresso + indicador de dobras ---------- */
+  function scrollUI() {
+    const SECTIONS = [
+      { id: "hero", label: "Início" },
+      { id: "o-domus", label: "O Domus" },
+      { id: "experiencia", label: "Experiência" },
+      { id: "perfeita-alegria", label: "A Perfeita Alegria" },
+      { id: "franciscano", label: "Jubileu" },
+      { id: "pregadores", label: "Pregadores" },
+      { id: "inscricao", label: "Inscrição" },
+    ];
+    const dotsNav = $("#sectionDots");
+    const bar = $("#scrollProgress");
+    const navLinks = $$(".nav-desktop a");
+
+    if (dotsNav) {
+      dotsNav.innerHTML = SECTIONS.map((s) =>
+        `<a href="#${s.id}" data-sec="${s.id}" data-label="${s.label}" aria-label="Ir para ${s.label}"></a>`).join("");
+    }
+    const dots = dotsNav ? $$("a", dotsNav) : [];
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const y = window.scrollY || h.scrollTop;
+        if (bar) bar.style.width = (max > 0 ? (y / max) * 100 : 0).toFixed(1) + "%";
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    if ("IntersectionObserver" in window) {
+      const setActive = (id) => {
+        dots.forEach((d) => d.classList.toggle("is-active", d.dataset.sec === id));
+        navLinks.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === "#" + id));
+      };
       const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            links.forEach((l) => l.classList.remove("is-active"));
-            const a = map[e.target.id]; if (a) a.classList.add("is-active");
-          }
-        });
-      }, { rootMargin: "-45% 0px -50% 0px" });
-      Object.keys(map).forEach((id) => io.observe(document.getElementById(id)));
+        entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
+      }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+      SECTIONS.forEach((s) => { const el = document.getElementById(s.id); if (el) io.observe(el); });
     }
   }
 
@@ -502,6 +534,7 @@
     heroIntro();
     startHeroCarousel();
     header();
+    scrollUI();
     floatingCta();
     form();
     consentModal();
