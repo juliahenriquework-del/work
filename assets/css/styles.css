@@ -551,14 +551,14 @@ input, textarea, select { font: inherit; }
 .speakers__track::-webkit-scrollbar { display: none; }
 .speaker-card { scroll-snap-align: center; aspect-ratio: 3 / 4;
   background: linear-gradient(170deg, #4c0f18, #1f0509); border-color: rgba(240,214,154,.22); }
-.speaker-card__figure { position: absolute; inset: 0; display: grid; place-items: end center; overflow: hidden; z-index: 1; }
-/* silhueta humana (busto) reconhecível, borrada e em contraluz */
-.speaker-card__silhouette { width: 80%; height: 94%; color: #0c0204;
-  filter: blur(2.5px) drop-shadow(0 0 30px rgba(0,0,0,.55)); }
-.speaker-card__silhouette svg { width: 100%; height: 100%; display: block; }
-.speaker-card__backlight { position: absolute; left: 50%; top: 20%; transform: translateX(-50%);
-  width: 82%; height: 82%; border-radius: 50%; z-index: 0;
-  background: radial-gradient(circle, rgba(160,88,98,.6), rgba(80,20,30,.22) 55%, transparent 72%); }
+.speaker-card__figure { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
+/* silhueta real do pregador (homem/mulher), velada e em contraluz */
+.speaker-card__figure img { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  height: 96%; width: auto; max-width: none; object-fit: contain;
+  filter: blur(1.5px) brightness(.5) contrast(1.05); opacity: .95; }
+.speaker-card__backlight { position: absolute; left: 50%; top: 16%; transform: translateX(-50%);
+  width: 84%; height: 84%; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle, rgba(170,92,102,.62), rgba(80,20,30,.24) 55%, transparent 72%); }
 .speaker-card__rim { position: absolute; inset: 0; z-index: 2; mix-blend-mode: screen;
   background: linear-gradient(112deg, transparent 46%, rgba(240,214,154,.42) 50%, transparent 54%);
   transform: translateX(-30%); opacity: .3; animation: rimLight 5.5s var(--ease-soft) infinite; }

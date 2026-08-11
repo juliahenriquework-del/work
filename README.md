@@ -95,8 +95,11 @@ No `config.js`, troque um item de `speakers` para:
 ```
 
 A foto entra com uma animação de `blur → nítido`. Coloque as imagens em
-`assets/img/pregadores/`. Enquanto `revealed: false`, o card aparece velado
-(silhueta + luz passando + "Em breve").
+`assets/img/pregadores/`. Enquanto `revealed: false`, o card aparece velado:
+uma **silhueta de pregador** (as imagens `homem.png` / `mulher.png` em
+`assets/img/pregadores/`), com facho de luz dourada e "Em breve". A silhueta
+alterna homem/mulher automaticamente; para fixar, use `figure: "homem"` ou
+`figure: "mulher"` no item do pregador.
 
 ---
 

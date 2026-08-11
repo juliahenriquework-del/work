@@ -81,14 +81,13 @@
       </article>`).join("");
   }
 
-  /* silhueta humana (cabeça, ombros e tronco) claramente reconhecível como pessoa */
-  const SILHOUETTE = `<svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="currentColor" aria-hidden="true"><circle cx="100" cy="58" r="34"/><path d="M62 96q38 16 76 0l-6 10q10 6 14 20l10 62q-56 20 -112 0l10-62q4-14 14-20z"/><path d="M52 264c0-58 30-92 48-92s48 34 48 92z"/></svg>`;
-
   /* ---------- pregadores ---------- */
   function renderSpeakers() {
     const track = $("#speakersTrack");
     if (!track || !CFG.speakers) return;
-    track.innerHTML = CFG.speakers.map((s) => {
+    track.innerHTML = CFG.speakers.map((s, i) => {
+      // silhueta de pregador: alterna homem/mulher (ou usa s.figure)
+      const fig = s.figure || (i % 2 === 0 ? "homem" : "mulher");
       if (s.revealed) {
         return `
         <article class="card speaker-card is-revealed reveal" data-anim="up" role="listitem">
@@ -104,7 +103,7 @@
       return `
         <article class="card speaker-card reveal" data-anim="up" role="listitem" aria-label="Pregador ainda não revelado">
           <span class="speaker-card__backlight"></span>
-          <span class="speaker-card__figure"><span class="speaker-card__silhouette">${SILHOUETTE}</span></span>
+          <span class="speaker-card__figure"><img src="assets/img/pregadores/${fig}.png" alt="" loading="lazy" /></span>
           <span class="speaker-card__rim"></span>
           <span class="speaker-card__scrim"></span>
           <div class="speaker-card__body">

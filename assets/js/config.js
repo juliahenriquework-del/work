@@ -106,13 +106,15 @@ window.DOMUS = {
   ],
 
   /* ---------- PREGADORES / LINE-UP ----------
-     Enquanto `revealed: false`, o card aparece velado (silhueta,
-     luz passando, "Em breve"). Quando revelar, troque para:
+     Enquanto `revealed: false`, o card aparece velado (silhueta de
+     pregador, luz passando, "Em breve"). A silhueta alterna homem/mulher
+     automaticamente; para fixar, use figure: "homem" ou "mulher".
+     Quando revelar, troque para:
        revealed: true, name, role, bio, photo (caminho da imagem). */
   speakers: [
-    { id: "p1", revealed: false, kicker: "Pregação", name: null, role: null, bio: null, photo: null },
-    { id: "p2", revealed: false, kicker: "Pregação", name: null, role: null, bio: null, photo: null },
-    { id: "p3", revealed: false, kicker: "Pregação", name: null, role: null, bio: null, photo: null },
+    { id: "p1", revealed: false, figure: "homem",  kicker: "Pregação", name: null, role: null, bio: null, photo: null },
+    { id: "p2", revealed: false, figure: "mulher", kicker: "Pregação", name: null, role: null, bio: null, photo: null },
+    { id: "p3", revealed: false, figure: "homem",  kicker: "Pregação", name: null, role: null, bio: null, photo: null },
     // Exemplo de card revelado:
     // { id: "p4", revealed: true, kicker: "Pregação",
     //   name: "Nome do Pregador", role: "Função / Comunidade",
