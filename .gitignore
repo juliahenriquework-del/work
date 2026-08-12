@@ -3,4 +3,5 @@ package.json
 package-lock.json
 scratch/
 *.log
+*.zip
 .DS_Store
