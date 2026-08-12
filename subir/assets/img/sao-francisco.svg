@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" fill="none">
+  <defs>
+    <linearGradient id="sf-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6e8c8"/>
+      <stop offset="45%" stop-color="#dcb15e"/>
+      <stop offset="100%" stop-color="#9a6e28"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#sf-gold)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- halo -->
+    <circle cx="120" cy="70" r="41" opacity=".55"/>
+    <!-- corpo / hábito (silhueta preenchida suave) -->
+    <path d="M120 33c-27 0-38 25-27 47-24 12-33 46-38 92-2 16-4 30-7 46q72 20 144 0c-3-16-5-30-7-46-5-46-14-80-38-92 11-22 0-47-27-47Z"
+          fill="url(#sf-gold)" fill-opacity=".14"/>
+    <!-- capuz / ombros -->
+    <path d="M93 80c-14 8-22 22-27 40M147 80c14 8 22 22 27 40"/>
+    <!-- cabeça inclinada (contemplativa) -->
+    <path d="M100 66a20 22 0 0 0 40 0"/>
+    <path d="M101 60q19 -12 38 0"/>
+    <!-- mãos em oração -->
+    <path d="M120 120c-9 12-11 30 0 44 11-14 9-32 0-44Z" fill="url(#sf-gold)" fill-opacity=".2"/>
+    <!-- cordão franciscano com três nós -->
+    <path d="M66 176q54 22 108 0"/>
+    <path d="M120 188v58" opacity=".9"/>
+    <circle cx="120" cy="204" r="4.5" fill="url(#sf-gold)" fill-opacity=".5"/>
+    <circle cx="120" cy="220" r="4.5" fill="url(#sf-gold)" fill-opacity=".5"/>
+    <circle cx="120" cy="236" r="4.5" fill="url(#sf-gold)" fill-opacity=".5"/>
+    <!-- pombinha na mão -->
+    <path d="M150 150c8-4 18-3 24 3-6 2-8 6-8 11-5-4-11-4-16-2" fill="url(#sf-gold)" fill-opacity=".25"/>
+    <path d="M166 156l9-6" opacity=".8"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+DOMUS 2026 — site pronto para publicar
+=======================================
+
+Esta pasta contém tudo o que o site precisa para funcionar.
+
+COMO PUBLICAR
+- Envie TODO o conteúdo desta pasta (o index.html e a pasta assets)
+  para a hospedagem (Netlify, Vercel, GitHub Pages, Hostinger, etc.).
+- O index.html deve ficar na raiz do site.
+
+COMO EDITAR (data, preço, lotes, pregadores, fotos, links, termo)
+- Tudo fica em: assets/js/config.js
+
+Requer conexão à internet nos visitantes (as fontes vêm do Google Fonts).
